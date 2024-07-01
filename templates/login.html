@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Login Page
+{% endblock title %}
+
+{% block nav_items %}
+<li class="nav-item">
+    <a class="nav-link" href="#">Home</a>
+</li>
+<!-- <li class="nav-item">
+        <a class="nav-link" href="#">Login</a>
+    </li> -->
+<li class="nav-item">
+    <a class="nav-link" href="#">Register</a>
+</li>
+{% endblock nav_items %}
+
+{% block content %}
+<style>
+    .centered-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .form {
+        width: 20%; /* Adjust based on your preference */
+        max-width: 500px; /* Adjust based on your preference */
+    }
+    
+</style>
+
+<div class="centered-content" style="margin-top: 1rem;">
+    <h1 class>Login</h1>
+
+    <form action="/login" class="form" method="post">
+        <div class="form-group" style="margin-top: 1rem; display: flex;">
+            <label for="username" style="margin-right: 1rem" class="form-label">Username: </label>
+            <input type="text" name="username" required class="form-control" id="username">
+        </div>
+
+        <div class="form-group" style="margin-top: 1rem; display: flex;">
+            <label for="password" style="margin-right: 1.2rem;" class="form-label">Password: </label>
+            <input type="password" name="password" required class="form-control">
+        </div>
+        
+        <div class="form-group" style="margin-top: 2rem;">
+            <input type="submit" value="Login" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+{% endblock content %}
+ 
+{% block main_content %}
+{% endblock main_content %}
+
+{% block search %}
+{% endblock search %}

@@ -1,0 +1,82 @@
+{% extends 'nav_link.html' %}
+
+{% block title %}
+    Profile
+{% endblock title %}
+
+{% block content %}
+<style>
+    .centered-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .form {
+        display: flex;
+        width: 20%; /* Adjust based on your preference */
+        max-width: 500px; /* Adjust based on your preference */
+    }
+    .form-group label, .form-group textarea{
+        margin-top: 1rem;
+        min-width: 200px;
+    }
+    .form-group input, .form-group textarea{
+        margin-top: 0.8rem;
+    }
+
+</style>
+<div class="centered-content">
+    <h1 class="text-center">Profile</h1>
+    {% if session['username'] %}
+        {% if session['role'] == 'sponsor' %}
+        <form action="/sponsor_profile" method="post">
+            <div class="form-group" style="display: flex;">
+            <label for="first_name" class="form-label" >First Name</label>
+            <input type="text" name="first_name" class="form-control" id="first_name">
+            </div>
+            <div class="form-group" style="display: flex;">
+            <label for="last_name" class="form-label" >Last Name</label>
+            <input type="text" name="last_name" class="form-control" id="last_name">
+            </div>
+            <div class="form-group" style="display: flex;">
+                <label for="email" class="form-label" >Email</label>
+                <input type="email" name="email" class="form-control" id="email"> 
+            </div>
+            <div class="form-group" style="display: flex;">
+                <label for="phone" class="form-label" >Phone</label>
+                <input type="tel" name="phone" class="form-control" id="phone" >
+            </div>
+            <div class="form-group" style="display: flex;">
+                <label for="company_name" class="form-label" >Company Name</label>
+                <input type="text" name="company_name" class="form-control" id="company_name" >
+            </div>
+            <div class="form-group" style="display: flex;">
+                <label for="company_address" class="form-label" >Company Address</label>
+                <textarea name="company_address" class="form-control" id="company_address" rows="4" cols="50"></textarea>
+            </div>
+            <div class="form-group" style="display: flex;">
+                <label for="industry" class="form-label" >Industry</label>
+                <input type="text" name="industry" class="form-control" id="industry" >
+            </div>
+            <div class="form-group" style="display: flex;">
+                <label for="company_website" class="form-label" >Company Website</label>
+                <input type="text" name="company_website" class="form-control" id="company_website" >
+            </div>
+            <div class="form-group" style="display: flex;">
+                <label for="company_description" class="form-label" >Company Description</label>
+                <textarea name="company_description" class="form-control" id="company_description" rows="4" cols="50"></textarea>
+            </div>
+            <div class="form-group" style="display: flex;">
+                <label for="budget" class="form-label" >Budget</label>
+                <input type="text" name="budget" class="form-control" id="budget" placeholder="₹">
+            </div>
+            <div class="submit" style="margin-top: 3rem;">
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </div>
+        {% endif %}
+    {% endif %}
+</div>    
+{% endblock content %}

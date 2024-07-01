@@ -1,0 +1,26 @@
+{% extends 'nav_link.html' %}
+
+{% block title %} Edit Category - Admate {% endblock title %}
+
+{% block main_content %}
+
+<div class="container mt-5">
+    <h2>Edit Your Category</h2>
+    <form action="{{ '/edit_category/' + category.category_id|string }}" method="post" class="form">
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" class="form-control" id="title" name="title" required value={{ category.name }}>
+        </div>
+        <div class="form-group mt-3">
+            <label for="content">Content:</label>
+            <textarea class="form-control" id="content" name="content" rows="5" required>{{ category.description }}</textarea>
+        </div>
+        <div class="form-group mt-3">
+            <label for="image">Image:</label>
+            <input type="file" class="form-control" id="image" name="image" value={{ category.image }}>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Edit Category</button>
+    </form>
+</div>
+    
+{% endblock main_content %}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block nav_items %}
+
+    {% if session['username'] %}
+        {% if session['role'] == 'admin' %}
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('index') }}>Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('add_category') }}>Add Category</a>
+            </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link" href={{ url_for('create_campaign')}}>Create Campaign</a>
+            </li> -->
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('sponsor_requests') }}>Request</a>
+            </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link" href={{ url_for('add_niche') }}>Add Niche</a>
+            </li> -->
+            <li class="nav-item">
+                <a class="nav-link" href="">Summary</a>
+            </li>
+        
+        {% elif session['role'] == 'sponsor' %}
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('index') }}>Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('sponsor_profile') }}>Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('view_sponsor_profile') }}>View Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('add_category') }}>Add Category</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('add_niche') }}>Add Niche</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('create_campaign') }}>Create Campaign</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('sponsor_requests') }}>Request</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">View Campaigns</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">Summary</a>
+            </li>
+        {% elif session['role'] == 'influencer' %}
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('index') }}>Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">View Campaigns</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">Summary</a>
+            </li>
+
+        {% endif %}
+
+        <li class="nav-item">
+            <a class="nav-link" href={{ url_for('logout') }}>Logout</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled">{{ session['username'] }}</a>
+        </li>
+    
+    {% else %}
+    <li class="nav-item">
+        <a class="nav-link" href={{ url_for('login') }}>Login</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href={{ url_for('first_page_registration') }}>Register</a>
+    </li>
+    {% endif %}
+{% endblock nav_items %}

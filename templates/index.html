@@ -1,0 +1,70 @@
+{% extends 'nav_link.html' %}
+
+{% block title %}
+Home - Admate
+{% endblock title %}
+
+
+{% block main_content %}
+{% include 'search.html' %}
+{% if session['username'] %}
+<div class="container-fluid mt-5">
+    {% for category in categories %}
+    <div class="container-fluid mt-5">
+        <div class="row">    
+            <div class="col-9">
+                <h3 class="">{{category.name}}</h3>
+                <p class="">{{category.description}}</p>
+            </div>
+            {% if (session['role'] == 'admin') or (session['role'] == 'sponsor') %} 
+            <div class="col-3">
+                <a href={{ url_for('edit_category', category_id = category.category_id) }} class="btn btn-primary">Edit Category</a>
+                <a href={{ url_for('delete_category', category_id = category.category_id) }} class="btn btn-danger">Delete Category</a>
+            </div>
+            {% endif %}
+        </div>
+        <div class="row container-fluid justify-content-start">
+        {% for niche in category.niches %}
+        <div class="card col-3 m-3">
+            <div class="card-body">
+                <h5 class="card-title">{{niche.name}}</h5>
+                <p class="card-text">{{niche.description}}</p>
+                {% if session['role'] == 'sponsor' %}
+                <div class="row">
+                    <div class="col-6">
+                        <a href={{ url_for('edit_niche', niche_id = niche.niche_id) }} class="btn btn-primary">Update</a>
+                    </div>
+                    <div class="col-6">
+                        <a href={{ url_for('delete_niche', niche_id = niche.niche_id) }} class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+                {% endif %}
+                {% if session['username'] == 'sponsor' %}
+                <div class="row">
+                    <div class="col-6">
+                        <a href="" class="btn btn-primary">Update</a>
+                    </div>
+                    <!-- <div class="col-6">
+                        <a href="" class="btn btn-danger">Delete</a>
+                    </div> -->
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        <hr class="mt-2">
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% else %} 
+<div class="container-fluid mt-2 p-5">
+    <h1 class="text-center"> Welcome to Admate! </h1>
+    <p class="text-center">Find right mate for your add at Admate!</p>
+    <div class="d-flex justify-content-center">
+        <a class="btn btn-primary justify-content-center" href={{ url_for('login')}}> Find Now</a>
+    </div>
+</div>
+{% endif %}
+{% endblock main_content %}

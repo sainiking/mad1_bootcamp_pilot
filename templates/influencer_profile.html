@@ -1,0 +1,62 @@
+{% extends 'nav_link.html' %}
+{% block title %}
+Profile
+{% endblock title %}
+
+{% block content %}
+<h1 class="text-center">Profile</h1>
+{% if session['username'] %}
+    {% if session['role'] == 'influencer' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Personal Information</h3>
+                <table class="table">
+                    <tr>
+                        <td>Full Name</td>
+                        <td>{{ user.full_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Phone</td>
+                        <td>{{ user.phone }}</td>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td>{{ user.address }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <h3>Bank Information</h3>
+                <table class="table">
+                    <tr>
+                        <td>Bank Name</td>
+                        <td>{{ user.bank_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Account Number</td>
+                        <td>{{ user.account_number }}</td>
+                    </tr>
+                    <tr>
+                        <td>IFSC Code</td>
+                        <td>{{ user.ifsc_code }}</td>
+                    </tr>
+                    <tr>
+                        <td>Branch Name</td>
+                        <td>{{ user.branch_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>UPI</td>
+                        <td>{{ user.upi }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endif %}
+{% endblock content %}

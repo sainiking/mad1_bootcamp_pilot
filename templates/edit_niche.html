@@ -1,0 +1,60 @@
+{% extends 'nav_link.html' %}
+
+{% block title %} Add Niche - Admate {% endblock title %}
+
+{% block content %}
+<style>
+    .centered-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .form-group label{
+        display: flex;
+        margin-top: 1rem;
+        min-width: 100px;
+    }
+    .form-group input, .form-group textarea, .form-group select{
+        margin-top: 0.8rem;
+    }
+    .form-group{
+        display: flex;
+    }
+</style>
+<div class="centered-content">
+    <h3 style="margin-top: 4rem;">Update, Your Niche here!</h3>
+    <form action="{{ '/edit_niche/' + niche.niche_id|string }}" method="post" class="form">
+        <div class="form-group" style="margin-top: 3rem;">
+            <label for="niche_name" class="form-label">Niche Name:</label>
+            <input type="text" name="niche_name" id="niche_name" class="form-control" required value={{ niche.name }}>
+        </div>
+        <div class="form-group">
+            <label for="description" class="form-label">Description:</label>
+            <textarea name="description" id="description" class="form-control" required >{{ niche.description }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="image_url" class="form-label">Image URL:</label>
+            <input type="url" name="image_url" id="image_url" class="form-control" value={{ niche.image_url }}>
+        </div>
+        <div class="form-group">
+            <label for="category_id" class="form-label">Category:</label>
+            <select name="category_id" id="category_id" class="form-control">
+                <option>Choose..</option>
+                {% for category in categories %}
+                {% if category.category_id == niche.category_id %}
+                    <option value="{{ category.category_id }}" selected>{{ category.name }}</option>
+                {% else %}
+                    <option value="{{ category.category_id }}">{{ category.name }}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group" style="margin-top: 2rem; margin-left: 8rem;">
+            <button type="submit" value="Add Niche" class="btn btn-primary"> Edit Niche </button>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

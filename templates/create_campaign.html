@@ -1,0 +1,59 @@
+{% extends 'nav_link.html' %}
+
+{% block title %}
+    Create Campaign
+{% endblock title %}
+
+{% block content %}
+<h1 class="text-center">Create Campaign</h1>
+
+<form action="/create_campaign" method="post" class="form">
+    <div class="form-group">
+        <label for="campaign_name" class="form-label"><strong>Campaign Name</strong></label>
+        <input type="text" name="campaign_name" required class="form-control" id="campaign_name">
+    </div>
+    <div class="form-group">
+        <label for="description" class="form-label"><strong>Description</strong></label>
+        <textarea name="description" id="description" class="form-control" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="category" class="form-label"><strong>Category</strong></label>
+        <select name="category" id="category" class="form-control">
+            <option selected>Choose..</option>
+            {% for category in categories %}
+                <option value="{{ category.category_id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="niche" class="form-label"><strong>Niche</strong></label>
+        <select name="niche" id="niche" class="form-control">
+            <option selected>Choose..</option>
+            {% for niche in niches %}
+                <option value="{{ niche.niche_id }}">{{ niche.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="start_date" class="form-label"><strong>Start Date</strong></label>
+        <input type="date" name="start_date" id="start_date" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="end_date" class="form-label"><strong>End Date</strong></label>
+        <input type="date" name="end_date" id="end_date" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="budget" class="form-label"><strong>Budget (INR)</strong></label>
+        <input type="number" name="budget" id="budget" class="form-control" placeholder="₹">
+    </div>
+    <div class="form-group">
+        <label for="status" class="form-label"><strong>Status</strong></label>
+        <select name="status" id="status" class="form-control">
+            <option value="1">Active</option>
+            <option value="2">Inactive</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create Campaign" class="btn btn-primary">
+</form>
+{% endblock content %}

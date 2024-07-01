@@ -1,0 +1,33 @@
+{% block content %}
+  <form class="d-flex search" role="search" style="margin-top: 2rem;" action="/search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" 
+        {% if query %}
+        value="{{ query }}"
+        {% endif %}
+        >
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+{% if query %}
+    
+    <h2>Categories matching your search:</h2>
+    {% if categories %}
+         {% for category in categories %}
+            {{ category.name }}
+         {% endfor %}
+    {% else %}
+    No matches
+    {% endif %}
+
+    <hr>
+
+    <h2>Niches matching your search:</h2>
+    {% if niches %}
+         {% for niche in niches %}
+            {{ niche.name }}
+         {% endfor %}
+    {% else %}
+    No matches
+    {% endif %}
+
+{% endif %}
+{% endblock content %}

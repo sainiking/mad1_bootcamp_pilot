@@ -294,7 +294,7 @@ def view_sponsor_profile():
         return redirect(url_for('index'))
     
     if req.method == "GET":
-        return render_template('view_sponsor_profile.html')
+        return render_template('view_sponsor_profile.html', sponsor_profile=sponsor_profile)
     
     # if req.method == "POST":
     #     first_name = req.form.get("first_name")

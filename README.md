@@ -34,7 +34,7 @@ Admate is a web application that connects influencers with sponsors. It allows s
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/yourusername/admate.git
+   git clone (https://github.com/sainiking/mad1_bootcamp_pilot)
    cd admate
 
 2. Create and activate a virtual environment:

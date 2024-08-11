@@ -1,0 +1,32 @@
+<!-- templates/view_notifications.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Campaign Notifications!</h1>
+        <ul class="list-group">
+            {% for notification in notifications %}
+                <li class="list-group-item">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Campaign: {{ notification.campaign }}</h5>
+                        <small>{{ notification.timestamp }}</small>
+                    </div>
+                    <p class="mb-1">{{ notification.message }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('all_campaign') }}" class="btn btn-primary mt-4">Back to Dashboard</a>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

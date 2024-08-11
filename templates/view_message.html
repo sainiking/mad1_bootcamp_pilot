@@ -1,0 +1,36 @@
+{% extends 'nav_link.html' %}
+
+{% block title %}
+    View Messages
+{% endblock title %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Messages</h2>
+    <div class="list-group">
+        {% for message in messages %}
+            {% if message.sender == 'admin' %}
+            <div class="list-group-item">
+                <h5 class="mb-1">From: {{ message.sender | capitalize }}</h5>
+                <h8 class="mb-1"><strong>Subject: </strong>Reply related to unflag the campaign <strong>"{{ message.campaign.name }}"</strong> in the category "{{ message.category.name}}", whose niche is "{{ message.niche.name }}".</h8>
+                <p class="mb-1 mt-2">{{ message.content }}</p>
+                <small>Sent on: {{ message.timestamp }}</small>
+            </div>
+            {% else %}
+                <div class="list-group-item">
+                    <h5 class="mb-1">From: {{ message.sender | capitalize }}</h5>
+                    <h8 class="mb-1"><strong>Subject: </strong>She interested in campaign <strong>"{{ message.campaign.name | upper }}"</strong> with category "{{ message.category.name }}", whose niche is "{{ message.niche.name }}".</h8>
+                    <p class="mb-1 mt-2"><strong>Current Listing: </strong> {{ message.campaign.budget }}</p>
+                    <p class="mb-1 mt-2">{{ message.content }}</p>
+                    <small>Sent on: {{ message.timestamp }}</small>
+                </div>
+            {% endif %}
+            <li class="btn">
+                <a href="{{ url_for('reply_from_sponsor', message_id=message.id) }}" class="btn btn-primary mt-2">Reply</a>
+            </li>
+        {% endfor %}
+    </div>
+</div>
+    
+    {% endblock content %}

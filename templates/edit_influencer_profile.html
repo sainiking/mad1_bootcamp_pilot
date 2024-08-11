@@ -1,0 +1,177 @@
+{% extends 'nav_link.html' %}
+
+{% block title %}
+    Profile
+{% endblock title %}
+
+{% block content %}
+
+<div class="centered-content">
+    <div style="display: flex; justify-content: center;">
+        <div class="card" style="width: 50%;">
+            <div class="card-body">
+                <h1 class="text-center">Edit Profile</h1>
+                {% if session['username'] %}
+                    {% if session['role'] == 'influencer' %}
+                    <div class="container">
+                        <p class="text-center">Please fill in the details below to complete your profile.</p>
+                    </div>
+                    <div style="display: flex; justify-content: center;">
+                        <form action="/edit_influencer_profile" method="post" class="row g-3">
+                            <div class="col-md-6">
+                                <div class = 'form-group mt-2'>
+                                    <label for="first_name" class="form-label" >First Name</label>
+                                    <input type="text" name="first_name" class="form-control" id="first_name" value="{{ influencer_profile.first_name }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2" >
+                                    <label for="last_name" class="form-label" >Last Name</label>
+                                    <input type="text" name="last_name" class="form-control" id="last_name"value="{{ influencer_profile.last_name}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6" >
+                                <div class="form-group mt-2" >
+                                    <label for="email" class="form-label" >Email</label>
+                                    <input type="email" name="email" class="form-control" id="email" value="{{ influencer_profile.email}}"> 
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2" >
+                                    <label for="phone" class="form-label" >Phone</label>
+                                    <input type="tel" name="phone" class="form-control" id="phone" value="{{ influencer_profile.phone}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="category" class="form-label">Category</label>
+                                    <select name="category" class="form-control" id="category">
+                                        <option selected>Choose..</option>
+                                        {% for category in categories %}
+                                            <option value="{{ category.category_id }}">{{ category.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="niche" class="form-label">Select Niche</label>
+                                    <select name="niche" class="form-control" id="niche">
+                                        <option selected>Choose..</option>
+                                        {% for category in categories %}
+                                        <optgroup label="{{ category.name }}">
+                                            {% for niche in category.niches %}
+                                                <option value="{{ niche.niche_id }}">{{ niche.name }}</option>
+                                            {% endfor %}
+                                        </optgroup>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class = "col-md-6">
+                                <div class="form-group mt-2" >
+                                    <label for="bio" class="form-label" >Bio</label>
+                                    <textarea type="text" name="bio" class="form-control" id="bio" rows="4" cols="50">{{ influencer_profile.bio}} </textarea>
+                                </div>
+                            </div>
+                            <div class = 'col-md-6'>
+                                <div class="form-group mt-2" >
+                                    <label for="instagram_handle" class="form-label" >Instagram Handle</label>
+                                    <input type="text" name="instagram_handle" class="form-control" id="instagram_handle" value="{{ influencer_profile.instagram_handle }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6" >
+                                <div class="form-group mt-2" >
+                                    <label for="facebook_handle" class="form-label" >Facebook Handle</label>
+                                    <input type="text" name="facebook_handle" class="form-control" id="facebook_handle" value="{{ influencer_profile.facebook_handle}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="youtube_handle" class="form-label" >YouTube Handle</label>
+                                    <input type="text" name="youtube_handle" class="form-control" id="youtube_handle" value="{{ influencer_profile.youtube_handle}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2" >
+                                    <label for="blog_url" class="form-label" >Blog URL</label>
+                                    <input name="blog_url" class="form-control" id="blog_url" value="{{ influencer_profile.blog_url}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="followers_count" class="form-label" >Followers Count</label>
+                                    <input name="followers_count" class="form-control" id="followers_count" value="{{ influencer_profile.followers_count}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="total_engagement" class="form-label" > Total Engagement</label>
+                                    <input name="total_engagement" class="form-control" id="total_engagement" value="{{ influencer_profile.total_engagement}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="total_views" class="form-label" >Total Views</label>
+                                    <input name="total_views" class="form-control" id="total_views" value="{{ influencer_profile.total_views}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="reach" class="form-label" >Reach</label>
+                                    <input name="reach" class="form-control" id="reach" value="{{ influencer_profile.reach}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="age" class="form-label">Age</label>
+                                    <select name="age" class="form-control" id="age">
+                                        <option value="18-24" {% if influencer_profile.age == '18-24' %}selected{% endif %}>18-24</option>
+                                        <option value="25-34" {% if influencer_profile.age == '25-34' %}selected{% endif %}>25-34</option>
+                                        <option value="35-44" {% if influencer_profile.age == '35-44' %}selected{% endif %}>35-44</option>
+                                        <option value="45-54" {% if influencer_profile.age == '45-54' %}selected{% endif %}>45-54</option>
+                                        <option value="55-64" {% if influencer_profile.age == '55-64' %}selected{% endif %}>55-64</option>
+                                        <option value="65+" {% if influencer_profile.age == '65+' %}selected{% endif %}>65+</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="gender" class="form-label">Gender</label>
+                                    <select name="gender" class="form-control" id="gender">
+                                        <option value="male" {% if influencer_profile.gender == 'male' %}selected{% endif %}>Male</option>
+                                        <option value="female" {% if influencer_profile.gender == 'female' %}selected{% endif %}>Female</option>
+                                        <option value="other" {% if influencer_profile.gender == 'other' %}selected{% endif %}>Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="location" class="form-label">Location</label>
+                                    <input name="location" class="form-control" id="location" value="{{ influencer_profile.location }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="language" class="form-label">Language</label>
+                                    <input name="language" class="form-control" id="language" value="{{ influencer_profile.language }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="price" class="form-label">Price</label>
+                                    <input name="price" class="form-control" id="price" value="{{ influencer_profile.price }}">
+                                </div>
+                            </div>
+                            <div class="col-md-12 text-center mt-3">
+                                <button type="submit" class="btn btn-primary" style="border-radius: 15px; padding: 10px; width: 40%;">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>    
+{% endblock content %}

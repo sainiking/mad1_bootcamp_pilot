@@ -1,0 +1,41 @@
+{% extends 'nav_link.html' %}
+
+{% block title %}
+   Flagged Influencer
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid mt-5">
+    <h2 class="text-center mb-4">Flagged Influencer</h2>
+    <form method="POST" action="{{ url_for('search_influencer')}}" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="search" class="form-control" placeholder="Search flagged influencers..." value="{{ request.args.get('search', '') }}">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </form>
+    <div class="row">
+        {% for influencer in influencers %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ influencer.first_name }} {{ influencer.last_name}}</h5>
+                    <p class="card-text"><strong>Category:</strong> {{ influencer.category.name }}</p>
+                    <p class="card-text"><strong>Niche:</strong> {{ influencer.niche.name }}</p>
+                    <p class="card-text"><strong>Reach:</strong> {{ influencer.reach }}</p>
+                    <p class="card-text"><strong>Followers:</strong> {{ influencer.followers_count }}</p>
+                    {% if influencer.campaigns %}
+                        <p class="card-text"><strong>Engagement Campaign:</strong> {{ influencer.campaigns[0].name }}</p>
+                    {% else %}
+                        <p class="card-text"><strong>Engagement Campaign:</strong> No campaigns</p>
+                    {% endif %}
+                    <form method="POST" action="{{ url_for('unflag_influencer', influencer_id=influencer.id) }}">
+                        <a href="{{ url_for('profile_view_influencer', user=influencer.user) }}" class="btn btn-primary mt-2" style="border-radius: 15px;">View Profile</a>
+                        <button type="submit" class="btn btn-danger mt-2" style="border-radius: 15px;">Unflag Influencer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

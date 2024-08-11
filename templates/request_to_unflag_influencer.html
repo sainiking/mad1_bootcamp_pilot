@@ -1,0 +1,28 @@
+{% extends 'nav_link.html' %}
+
+{% block title %}
+    Request to Unflag Influencer
+{% endblock title %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header text-center">
+            <h2>Request to Unflag Influencer</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('request_to_unflag_influencer', influencer_id=influencer.id) }}">
+                <div class="form-group">
+                    <label for="message">Message to Admin:</label>
+                    <textarea class="form-control" id="message" name="message" rows="4" placeholder="Enter your message here..."></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary mt-2">Send Unflag Request</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

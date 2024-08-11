@@ -1,0 +1,37 @@
+{% extends 'nav_link.html' %}
+
+{% block title %}
+   Summary
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid mt-5">
+    <h2 class="text-center mb-4">Influencer Performance Summary</h2>
+    <div class="row">
+        {% for influencer in influencers %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ influencer.first_name }} {{ influencer.last_name }}</h5>
+                    <p class="card-text"><strong>Category:</strong> {{ influencer.category.name }}</p>
+                    <p class="card-text"><strong>Niche:</strong> {{ influencer.niche.name }}</p>
+                    <p class="card-text"><strong>Reach:</strong> {{ influencer.reach }}</p>
+                    <p class="card-text"><strong>Followers:</strong> {{ influencer.followers_count }}</p>
+                    {% if influencer.campaigns %}
+                        <p class="card-text"><strong>Campaigns:</strong></p>
+                        <ul>
+                            {% for campaign in influencer.campaigns %}
+                                <li>{{ campaign.name }} (Sponsor: {{ campaign.user | capitalize }})</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="card-text"><strong>Campaigns:</strong> No campaigns</p>
+                    {% endif %}
+                    <a href="{{ url_for('profile_view_influencer', user=influencer.user) }}" class="btn btn-primary mt-2">View Profile</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

@@ -3,54 +3,37 @@
 {% block title %} Add Niche - Admate {% endblock title %}
 
 {% block content %}
-<style>
-    .centered-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-    .form-group label{
-        display: flex;
-        margin-top: 1rem;
-        min-width: 100px;
-    }
-    .form-group input, .form-group textarea, .form-group select{
-        margin-top: 0.8rem;
-    }
-    .form-group{
-        display: flex;
-    }
-</style>
-<div class="centered-content">
-    <h3 style="margin-top: 4rem;">Add Your Niche here!</h3>
-    <form action="/add_niche" method="post" class="form">
-        <div class="form-group" style="margin-top: 3rem;">
-            <label for="niche_name" class="form-label">Niche Name:</label>
-            <input type="text" name="niche_name" id="niche_name" class="form-control" required>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4">Add Your Niche Here!</h3>
+                    <form action="/add_niche" method="post" class="form">
+                        <div class="form-group mb-3">
+                            <label for="niche_name" class="form-label">Niche Name:</label>
+                            <input type="text" name="niche_name" id="niche_name" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="description" class="form-label">Description:</label>
+                            <textarea name="description" id="description" class="form-control" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="category_id" class="form-label">Category:</label>
+                            <select name="category_id" id="category_id" class="form-select" required>
+                                <option selected disabled>Choose...</option>
+                                {% for category in categories %}
+                                    <option value="{{ category.category_id }}">{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="d-grid mt-4">
+                            <input type="submit" value="Add Niche" class="btn btn-primary btn-block">
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="description" class="form-label">Description:</label>
-            <textarea name="description" id="description" class="form-control" required></textarea>
-        </div>
-        <div class="form-group">
-            <label for="image_url" class="form-label">Image URL:</label>
-            <input type="url" name="image_url" id="image_url" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="category_id" class="form-label">Category:</label>
-            <select name="category_id" id="category_id" class="form-control">
-                <option selected>Choose..</option>
-                {% for category in categories %}
-                    <option value="{{ category.category_id }}">{{ category.name }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="form-group" style="margin-top: 2rem; margin-left: 8rem;">
-            <input type="submit" value="Add Niche" class="btn btn-primary">
-        </div>
-    </form>
+    </div>
 </div>
-
 {% endblock content %}

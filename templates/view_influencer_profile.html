@@ -1,0 +1,149 @@
+{% extends 'nav_link.html' %}
+
+{% block title %}
+   View Profile
+{% endblock title %}
+
+{% block content %}
+
+<div class="centered-content">
+    <div style="display: flex; justify-content: center;">
+        <div class="card" style="width: 50%;">
+            <div class="card-body">
+                <h1 class="text-center">Profile</h1>
+                {% if session['username'] %}
+                    {% if session['role'] == 'influencer' %}
+                    <div style="display: flex; justify-content: center;">
+                        <form method="post" class="row g-3">
+                            <div class="col-md-6">
+                                <div class = 'form-group mt-2'>
+                                    <label for="first_name" class="form-label" >First Name</label>
+                                    <input type="text" name="first_name" class="form-control" id="first_name" value="{{ influencer_profile.first_name }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2" >
+                                    <label for="last_name" class="form-label" >Last Name</label>
+                                    <input type="text" name="last_name" class="form-control" id="last_name"value="{{ influencer_profile.last_name}}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6" >
+                                <div class="form-group mt-2" >
+                                    <label for="email" class="form-label" >Email</label>
+                                    <input type="email" name="email" class="form-control" id="email" value="{{ influencer_profile.email}}" readonly> 
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2" >
+                                    <label for="phone" class="form-label" >Phone</label>
+                                    <input type="tel" name="phone" class="form-control" id="phone" value="{{ influencer_profile.phone}}" readonly>
+                                </div>
+                            </div>
+                            <div class = "col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="category" class="form-label" >Category</label>
+                                    <input type="text" name="category" class="form-control" id="category" value="{{ influencer_profile.category.name}}" readonly>
+                                </div>
+                            </div>
+                            <div class = "col-md-6">
+                                <div class="form-group mt-2" >
+                                    <label for="niche" class="form-label" >Niche</label>
+                                    <input type="text" name="niche" class="form-control" id="niche" value="{{ influencer_profile.niche.name}}" readonly>
+                                </div>
+                            </div>
+                            <div class = "col-md-6">
+                                <div class="form-group mt-2" >
+                                    <label for="bio" class="form-label" >Bio</label>
+                                    <textarea type="text" name="bio" class="form-control" id="bio" rows="4" cols="50" readonly>{{ influencer_profile.bio}} </textarea>
+                                </div>
+                            </div>
+                            <div class = 'col-md-6'>
+                                <div class="form-group mt-2" >
+                                    <label for="instagram_handle" class="form-label" >Instagram Handle</label>
+                                    <input type="text" name="instagram_handle" class="form-control" id="instagram_handle" value="{{ influencer_profile.instagram_handle }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6" >
+                                <div class="form-group mt-2" >
+                                    <label for="facebook_handle" class="form-label" >Facebook Handle</label>
+                                    <input type="text" name="facebook_handle" class="form-control" id="facebook_handle" value="{{ influencer_profile.facebook_handle}}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="youtube_handle" class="form-label" >YouTube Handle</label>
+                                    <input type="text" name="youtube_handle" class="form-control" id="youtube_handle" value="{{ influencer_profile.youtube_handle}}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2" >
+                                    <label for="blog_url" class="form-label" >Blog URL</label>
+                                    <input name="blog_url" class="form-control" id="blog_url" value="{{ influencer_profile.blog_url}}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="followers_count" class="form-label" >Followers Count</label>
+                                    <input name="followers_count" class="form-control" id="followers_count" value="{{ influencer_profile.followers_count}}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="total_engagement" class="form-label" > Total Engagement</label>
+                                    <input name="total_engagement" class="form-control" id="total_engagement" value="{{ influencer_profile.total_engagement}}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="total_views" class="form-label" >Total Views</label>
+                                    <input name="total_views" class="form-control" id="total_views" value="{{ influencer_profile.total_views}}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="reach" class="form-label" >Reach</label>
+                                    <input name="reach" class="form-control" id="reach" value="{{ influencer_profile.reach}}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="age" class="form-label">Age</label>
+                                    <input name="age" class="form-control" id="age" value="{{ influencer_profile.age }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="gender" class="form-label">Gender</label>
+                                    <input name="gender" class="form-control" id="gender" value="{{ influencer_profile.gender }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="location" class="form-label">Location</label>
+                                    <input name="location" class="form-control" id="location" value="{{ influencer_profile.location }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="language" class="form-label">Language</label>
+                                    <input name="language" class="form-control" id="language" value="{{ influencer_profile.language }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="price" class="form-label">Price</label>
+                                    <input name="price" class="form-control" id="price" value="{{ influencer_profile.price }}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center mt-3">
+                            <a class="btn btn-primary" style="border-radius: 15px; padding: 10px; width: 40%;" href={{ url_for('edit_influencer_profile') }}>Edit Profile</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    {% endif %}
+</div>    
+{% endblock content %}

@@ -3,58 +3,41 @@
 {% block title %} Delete Niche - Admate {% endblock title %}
 
 {% block main_content %}
-<style>
-    .centered-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-    .form-group label{
-        display: flex;
-        margin-top: 1rem;
-        min-width: 100px;
-    }
-    .form-group input, .form-group textarea, .form-group select{
-        margin-top: 0.8rem;
-    }
-    .form-group{
-        display: flex;
-    }
-</style>
-<div class="centered-content">
-    <h4 style="margin-top: 4rem;">Are You Sure to Delete this Niche?</h4>
-    <form action="{{ '/delete_niche/' + niche.niche_id|string }}" method="post" class="form">
-        <div class="form-group" style="margin-top: 3rem;">
-            <label for="niche_name" class="form-label">Niche Name:</label>
-            <input type="text" name="niche_name" id="niche_name" class="form-control" required value={{ niche.name }} disabled>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger text-white text-center">
+                    <h4>Are You Sure to Delete this Niche?</h4>
+                </div>
+                <div class="card-body">
+                    <form action="{{ url_for('delete_niche', niche_id=niche.niche_id) }}" method="post" class="form">
+                        <div class="form-group mt-3">
+                            <label for="niche_name" class="form-label">Niche Name:</label>
+                            <input type="text" name="niche_name" id="niche_name" class="form-control" required value="{{ niche.name }}" disabled>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="description" class="form-label">Description:</label>
+                            <textarea name="description" id="description" class="form-control" rows="5" required disabled>{{ niche.description }}</textarea>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="category_id" class="form-label">Category:</label>
+                            <select name="category_id" id="category_id" class="form-control" disabled>
+                                <option value="{{ niche.category_id }}" selected>{{ niche.category.name }}</option>
+                                {% for category in categories %}
+                                {% if category.category_id == niche.category_id %}
+                                <option value="{{ category.category_id }}">{{ category.name }}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group mt-4 text-center">
+                            <button type="submit" class="btn btn-danger">Delete Niche</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="description" class="form-label">Description:</label>
-            <textarea name="description" id="description" class="form-control" required disabled>{{ niche.description }}</textarea>
-        </div>
-        <div class="form-group">
-            <label for="image_url" class="form-label">Image URL:</label>
-            <input type="url" name="image_url" id="image_url" class="form-control" value={{ niche.image_url }} disabled>
-        </div>
-        <div class="form-group">
-            <label for="category_id" class="form-label">Category:</label>
-            <select name="category_id" id="category_id" class="form-control" disabled>
-                <option>Choose..</option>
-                {% for category in categories %}
-                {% if category.category_id == niche.category_id %}
-                    <option value="{{ category.category_id }}" selected>{{ category.name }}</option>
-                {% else %}
-                    <option value="{{ category.category_id }}">{{ category.name }}</option>
-                {% endif %}
-                {% endfor %}
-            </select>
-        </div>
-        <div class="form-group" style="margin-top: 2rem; margin-left: 8rem;">
-            <button type="submit" value="Add Niche" class="btn btn-danger"> Delete Niche </button>
-        </div>
-    </form>
+    </div>
 </div>
-    
 {% endblock main_content %}

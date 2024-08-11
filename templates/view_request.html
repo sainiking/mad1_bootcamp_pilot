@@ -1,0 +1,43 @@
+{% extends 'nav_link.html' %}
+
+{% block title %}
+    View Requests
+{% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Requests</h2>
+    <div class="row">
+        {% if not requests %}
+        <p class="text-center">No requests found.</p>
+        {% else %}
+            {% for request in requests %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Campaign: {{ request.campaign.name }}</h5>
+                        <p class="card-text"><strong>Sponsor: </strong> {{ request.sponsor.user | upper }}</p>
+                        <p class="card-text"><strong>Category: </strong>{{ request.campaign.category.name if request.campaign.category else 'N/A' }}</p>
+                        <p class="card-text"><strong>Niche: </strong>{{ request.campaign.niche.name if request.campaign.niche else 'N/A' }}</p>
+                        <p class="card-text"><strong>Start Date: </strong> {{ request.campaign.start_date }}</p>
+                        <p class="card-text"><strong>End Date: </strong> {{ request.campaign.end_date }}</p>
+                        <p class="card-text"><strong>Price: </strong> {{ request.campaign.budget }}</p>
+                        <p class="card-text"><strong>Message: </strong> {{ request.message }}</p>
+                        <p class="card-text"><strong>Status: </strong> <i>{{ request.status | capitalize }}</i></p>
+                        {% if request.status == 'pending' %}
+                            <form method="POST" action="{{ url_for('accept_request', request_id=request.id) }}" style="display:inline;">
+                                <button type="submit" class="btn btn-success">Accept</button>
+                            </form>
+                            <form method="POST" action="{{ url_for('reject_request_', request_id=request.id) }}" style="display:inline;">
+                                <button type="submit" class="btn btn-danger">Reject</button>
+                            </form>
+                            <a href="{{ url_for('negotiate_request', request_id=request.id) }}" class="btn btn-warning">Negotiate</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

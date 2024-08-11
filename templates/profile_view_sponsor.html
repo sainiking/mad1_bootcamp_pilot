@@ -8,7 +8,6 @@
 
 <div class="centered-content">
     {% if session['username'] %}
-        {% if session['role'] == 'sponsor' %}
         <div style="display: flex; justify-content: center;">
             <div class = 'card' style="width: 50%;">
                 <div class="card-body">
@@ -74,14 +73,10 @@
                                 <textarea name="company_address" class="form-control" id="company_address" rows="4" cols="50" readonly>{{ sponsor_profile.company_address }}</textarea>
                             </div>
                         </div>
-                        <div class="col-md-12 text-center mt-3">
-                            <a class="btn btn-primary" style="border-radius: 15px; padding: 10px; width: 40%;" href={{ url_for('edit_sponsor_profile') }}>Edit Profile</a>
-                        </div>
                     </form>
                 </div>
             </div>
         </div>
-        {% endif %}
     {% endif %}
 </div>    
 {% endblock content %}

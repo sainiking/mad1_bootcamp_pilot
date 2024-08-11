@@ -98,12 +98,28 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('login'))
 
+        session['user_id'] = user.id
         session['username'] = user.username
         session['email'] = user.email
         session['role'] = user.roles[0].role_name
 
         flash('Login successful')
-        return redirect(url_for('index'))
+        return redirect(url_for('all_campaign'))
+
+@app.route('/forgot_password', methods=['GET','POST'])
+def forgot_password():
+    if request.method == 'GET':
+        return render_template('forgot_password.html')
+    if request.method == 'POST':
+        email = request.form.get('email')
+        user = User.query.filter_by(email=email).first()
+        if not user:
+            flash('Email not found')
+            return redirect(url_for('forgot_password'))
+        
+        flash('An email has been sent to you with instructions on how to reset your password')
+        return redirect(url_for('login'))
+    
 
 @app.route("/logout")
 def logout():

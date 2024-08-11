@@ -1,7 +1,7 @@
 {% extends 'nav_link.html' %}
 
 {% block title %}
-    Create Campaign
+    Update Campaign
 {% endblock title %}
 
 {% block content %}
@@ -9,18 +9,19 @@
     <div style="display: flex; justify-content: center;">
         <div class = 'card' style="width: 50%;">
             <div class="card-body">
-                <h3 class="text-center">Create Campaign</h3>
-                    <form action="/create_campaign" method="post" class="row g-3">
-                        <div class="col-md-6">    
+                <h3 class="text-center">Update Campaign</h3>
+                    <form action="/edit_campaign//{{ campaign.id if campaign else '' }}" method="post" class="row g-3">
+                        <input type="hidden" name="campaign_id" value="{{ campaign.id if campaign else '' }}">
+                        <div class="col-md-6">  
                             <div class="form-group mt-2">
                                 <label for="name" class="form-label">Campaign Name</label>
-                                <input type="text" name="name" required class="form-control" id="name">
+                                <input type="text" name="name" value="{{ campaign.name if campaign else ''}}" required class="form-control" id="name">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mt-2">
                                 <label for="description" class="form-label">Description</label>
-                                <textarea name="description" id="description" class="form-control" required></textarea>
+                                <textarea name="description" id="description" class="form-control" required>{{ campaign.description if campaign else '' }}</textarea>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -29,7 +30,7 @@
                                 <select name="category" class="form-control" id="category">
                                     <option selected>Choose..</option>
                                     {% for category in categories %}
-                                        <option value="{{ category.category_id }}">{{ category.name }}</option>
+                                        <option value="{{ category.category_id }}" {% if campaign and campaign.category_id == category.category_id %}selected{% endif %}>{{ category.name }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -42,7 +43,7 @@
                                     {% for category in categories %}
                                     <optgroup label="{{ category.name }}">
                                         {% for niche in category.niches %}
-                                            <option value="{{ niche.niche_id }}">{{ niche.name }}</option>
+                                            <option value="{{ niche.niche_id }}" {% if campaign and campaign.niche_id == niche.niche_id %}selected{% endif %}>{{ niche.name }}</option>
                                         {% endfor %}
                                     </optgroup>
                                     {% endfor %}
@@ -52,25 +53,25 @@
                         <div class="col-md-6">
                             <div class="form-group mt-2">
                                 <label for="start_date" class="form-label">Start Date</label>
-                                <input type="date" name="start_date" id="start_date" class="form-control">
+                                <input type="date" name="start_date" id="start_date" class="form-control" value="{{ campaign.start_date if campaign else '' }}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mt-2">
                                 <label for="end_date" class="form-label">End Date</label>
-                                <input type="date" name="end_date" id="end_date" class="form-control">
+                                <input type="date" name="end_date" id="end_date" class="form-control" value="{{ campaign.end_date if campaign else '' }}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mt-2">
                                 <label for="budget" class="form-label">Budget</label>
-                                <input type="number" name="budget" id="budget" class="form-control" placeholder="₹">
+                                <input type="number" name="budget" id="budget" class="form-control" placeholder="₹" value="{{ campaign.budget if campaign else '' }}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mt-2">
                                 <label for="status" class="form-label">Status</label>
-                                <select name="status" id="status" class="form-control">
+                                <select name="status" id="status" class="form-control" value="{{ campaign.status if campaign else '' }}">
                                     <option>Active</option>
                                     <option>Inactive</option>
                                 </select>
@@ -78,7 +79,7 @@
                         </div>
                         <div class="col-md-12 text-center mt-3">
                             <div class="form-group mt-2">
-                                <button type="submit" class="btn btn-primary" style=" border-radius: 15px; padding: 10px; width: 50%;">Create Campaign</button>
+                                <button type="submit" class="btn btn-primary" style=" border-radius: 15px; padding: 10px; width: 50%;">Update Campaign</button>
                             </div>
                         </div>
                     </form>    

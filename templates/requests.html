@@ -4,44 +4,58 @@
 
 {% block main_content %}
 <div class="container-fluid mt-5">
-    <h1 class="text-center">Requests</h1>
-    <div class="container-fluid mt-5">
-        <div class="row">
+    <h1 class="text-center mb-4">Requests</h1>
+    <div class="row">
         {% for request in requests %}
-        <div class="card m-1 col-3">
-            <div class="card-body">
-                <h5 class="card-title">{{request.request_type}} &emsp; <span class="badge text-bg-secondary">{{request.status}}</span></h5>
-                <p class="card-text"><strong>Request Date: </strong><em>{{request.request_date}}</em></p>
-                <div class="container-fluid mt-2">
-                {% if request.request_type == 'add_category' %}
-                <p class="card-text">Category Name: {{request.new_category_name}}</p>
-                <p class="card-text">Description: {{request.new_category_description}}</p>
-                {% endif %}
-                {% if request.request_type == 'edit_category' %}
-                <p class="card-text">Category Name: {{request.category.name}}</p>
-                <p class="card-text">Description: {{request.category.description}}</p>
-                <hr>
-                <p class="card-text">Update to </p>
-                <p class="card-text">Category Name: {{request.new_category_name}}</p>
-                <p class="card-text">Description: {{request.new_category_description}}</p>
-                {% endif %}
-                {% if request.request_type == 'delete_category' %}
-                <p class="card-text">Category Name: {{request.category.name}}</p>
-                <p class="card-text">Description: {{request.category.description}}</p>
-                {% endif %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ request.request_type }} &emsp; <span class="badge bg-secondary">{{ request.new_category_name }}</span></h5>
+                    <p class="card-text"><strong>Request Date: </strong><em>{{ request.request_date }}</em></p>
+                    <h4><span class="badge bg-danger"><strong>Status: </strong>{{ request.status }}</span></h4>
+                    <div class="mt-3">
+                        {% if request.request_type == 'add_category' %}
+                        <p class="card-text"><strong>Category Name:</strong> {{ request.new_category_name }}</p>
+                        <p class="card-text"><strong>Description:</strong> {{ request.new_category_description }}</p>
+                        {% endif %}
+                        {% if request.request_type == 'edit_category' %}
+                        <p class="card-text"><strong>Category Name:</strong> {{ request.category.name }}</p>
+                        <p class="card-text"><strong>Description:</strong> {{ request.category.description }}</p>
+                        <hr>
+                        <p class="card-text"><strong>Update to:</strong></p>
+                        <p class="card-text"><strong>Category Name:</strong> {{ request.new_category_name }}</p>
+                        <p class="card-text"><strong>Description:</strong> {{ request.new_category_description }}</p>
+                        {% endif %}
+                        {% if request.request_type == 'delete_category' %}
+                        <p class="card-text"><strong>Category Name:</strong> {{ request.category.name }}</p>
+                        <p class="card-text"><strong>Description:</strong> {{ request.category.description }}</p>
+                        {% endif %}
+                    </div>
+                    {% if session['role'] == 'admin' %}
+                    <div class="d-flex justify-content-between mt-3">
+                        <a href="{{ url_for('approve_request', id=request.id) }}" class="btn btn-success" style="border-radius: 15px; padding: 10px; width: 45%;">Approve</a>
+                        <a href="{{ url_for('reject_request', id=request.id) }}" class="btn btn-danger" style="border-radius: 15px; padding: 10px; width: 45%;">Reject</a>
+                    </div>
+                    {% endif %}
                 </div>
-                {% if session['role'] == 'admin' %}
-                <div class="container-fluid mt-2">
-                    <a href={{url_for('approve_request',id = request.id)}} class="btn btn-success">Approve</a>
-                    <a href={{url_for('reject_request',id = request.id)}} class="btn btn-danger">Reject</a>
-                </div>
-                {% endif %}
             </div>
-
         </div>
         {% endfor %}
+        {% for request in unflag_requests %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Unflag Request</h5>
+                    <p class="card-text"><strong>Campaign Name:</strong> {{ request.campaign.name }}</p>
+                    <p class="card-text"><strong>Sponsor:</strong> {{ request.sponsor.username }}</p>
+                    <div class="d-flex justify-content-between mt-3">
+                        <a href="{{ url_for('approve_unflag_request', id=request.id) }}" class="btn btn-success" style="border-radius: 15px; padding: 10px; width: 45%;">Approve</a>
+                        <a href="{{ url_for('reject_unflag_request', id=request.id) }}" class="btn btn-danger" style="border-radius: 15px; padding: 10px; width: 45%;">Reject</a>
+                    </div>
+                </div>
+            </div>
         </div>
+        {% endfor %}
     </div>
 </div>
-
 {% endblock main_content %}

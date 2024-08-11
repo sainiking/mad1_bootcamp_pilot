@@ -15,26 +15,29 @@ def create_app():
     with app.app_context():
         db.create_all()
 
+        add_default_categories()
+
+        add_default_niches()
+
         admin_role = Role.query.filter_by(role_name='admin').first()
         if not admin_role:       
-            admin_role = Role(role_name='admin', description='Administration')
+            admin_role = Role(role_name='admin', description='Administration') # type: ignore
             db.session.add(admin_role)
         
         sponsor_role = Role.query.filter_by(role_name='sponsor').first()
         if not sponsor_role:   
-            sponsor_role = Role(role_name='sponsor', description='Sponsor Profile')
+            sponsor_role = Role(role_name='sponsor', description='Sponsor Profile') # type: ignore
             db.session.add(sponsor_role)
         
         influencer_role = Role.query.filter_by(role_name='influencer').first()
         if not influencer_role:
-            influencer_role = Role(role_name='influencer', description='Influencer Profile')
+            influencer_role = Role(role_name='influencer', description='Influencer Profile') # type: ignore
             db.session.add(influencer_role)
 
 
         admin = User.query.filter_by(username='admin').first()
         if not admin:
-            admin = User(username='admin', email='admin@gmail.com', password='admin', role='admin', 
-                         roles = [admin_role])
+            admin = User(username='admin', email='admin@gmail.com', password='admin', role='admin', roles = [admin_role]) # type: ignore
         db.session.add(admin)
         db.session.commit()
     return app
@@ -46,4 +49,4 @@ from application.auth_routes import *
 from application.routes import *
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True) # type: ignore

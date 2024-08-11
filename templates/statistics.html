@@ -1,0 +1,70 @@
+{% extends 'nav_link.html' %}
+
+{% block title %}
+    Admin Dashboard
+{% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Statistics</h2>
+
+    <div class="row">
+        <!-- Sponsor Statistics -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    Sponsor Statistics
+                </div>
+                <div class="card-body">
+                    <p class="card-text"><strong>Total Sponsors:</strong> {{ total_sponsors }}</p>
+                    <p class="card-text"><strong>Average Spend per Sponsor:</strong> {{ average_spend_per_sponsor }}</p>
+                    <p class="card-text"><strong>Top Sponsors:</strong> 
+                        {% for sponsor in top_sponsors %}
+                            <li>{{ sponsor.user | capitalize }}</li>
+                        {% endfor %}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Influencer Statistics -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    Influencer Statistics
+                </div>
+                <div class="card-body">
+                    <p class="card-text"><strong>Total Influencers:</strong> {{ total_influencers }}</p>
+                    <p class="card-text"><strong>Costly Influencer:</strong>
+                        {% for influencer in costly_influencers %}
+                            <li>{{ influencer.user | capitalize }}</li>
+                        {% endfor %}
+                    </p>
+                    <p class="card-text"><strong>Top Influencers:</strong> 
+                        {% for influencer in top_influencers %}
+                            <li>{{ influencer.user | capitalize }}</li>
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Campaign Statistics -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    Campaign Statistics
+                </div>
+                <div class="card-body">
+                    <p class="card-text"><strong>Total Campaigns:</strong> {{ total_campaigns }}</p>
+                    <p class="card-text"><strong>Active Campaigns:</strong> {{ active_campaigns }}</p>
+                    <p class="card-text"><strong>Top Campaigns:</strong> 
+                        {% for campaign in top_campaigns %}
+                            <li>{{ campaign.name }}</li>
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

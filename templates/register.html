@@ -3,36 +3,26 @@
 {% block title %}
     Register Page
 {% endblock title%}
+
+{% block nav_items %}
+<li class="nav-item">
+    <a class="nav-link" href={{ url_for('index') }}>Home</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href={{ url_for('login') }}>Login</a>
+</li>
+<!-- <li class="nav-item">
+    <a class="nav-link" href="#">Register</a>
+</li> -->
+{% endblock nav_items %}
+
 {% block content %}
-
-<style>
-    .centered-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-    .form {
-        width: 20%; /* Adjust based on your preference */
-        max-width: 500px; /* Adjust based on your preference */
-    }
-    .form-group label{
-        display: flex;
-        margin-top: 1rem;
-        min-width: 200px;
-    }
-    .form-group div{
-        display: flex;
-    }
-
-</style>
-
-<div class="centered-content">
-    <h1 class>Let's get Started!</h1>
-
-    <form action="/register" class="form" method="post">
-        <div class="form-group">
+<div class="centered-content" style="margin-top: 2rem; ">
+    <h1 class="text-center">Let's get Started!</h1>
+    <h5 class="text-center">Register with Admate</h5>
+    <div style="display: flex; justify-content: center;">
+    <form action="/register" class="form" style="width: 50%;" method="post">
+        <div class="mt-3">
             <label for="username" class="form-label">Username</label>
             <input type="text" name="username" required class="form-control" id="username">
         </div>
@@ -48,10 +38,11 @@
             <label for="confirm_password" class="form-label">Confirm Password</label>
             <input type="password" name="confirm_password" required class="form-control">
         </div>
-        <div class="form-group" style="margin-top: 2rem;">
-            <input type="submit" value="Register" class="btn btn-primary">
+        <div class="mt-3 text-center">
+            <button type="submit" class="btn btn-primary" style="border-radius: 15px; padding: 10px; width: 50%;">Register</button>
         </div>
     </form>
+    </div>
 </div>
 {% endblock content%}
 
@@ -59,17 +50,7 @@
 {% block main_content %}
 {% endblock main_content %}
 
-{% block nav_items %}
-<!-- <li class="nav-item">
-    <a class="nav-link" href="#">Home</a>
-</li> -->
-<li class="nav-item">
-    <a class="nav-link" href="#">Login</a>
-</li>
-<!-- <li class="nav-item">
-    <a class="nav-link" href="#">Register</a>
-</li> -->
-{% endblock nav_items %}
+
 
 {% block search %}
 {% endblock search %}

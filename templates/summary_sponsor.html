@@ -1,0 +1,27 @@
+{% extends 'nav_link.html' %}
+
+{% block title %}
+   Summary
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid mt-5">
+    <h2 class="text-center mb-4">Sponser Performance Summary</h2>
+    <div class="row">
+        {% for sponsor in sponsors %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ sponsor.first_name }} {{ sponsor.last_name}}</h5>
+                    <p class="card-text"><strong>Company Name:</strong> {{ sponsor.company_name }}</p>
+                    <p class="card-text"><strong>Webiste:</strong> {{ sponsor.company_website }}</p>
+                    <p class="card-text"><strong>Industry:</strong> {{ sponsor.industry }}</p>
+                    <p class="card-text"><strong>Budget:</strong> {{ sponsor.budget }}</p>
+                    <a href="{{ url_for('profile_view_sponsor') }}" class="btn btn-primary">View Profile</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

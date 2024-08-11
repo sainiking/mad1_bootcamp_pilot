@@ -4,40 +4,56 @@
 
     {% if session['username'] %}
         {% if session['role'] == 'admin' %}
-            <li class="nav-item">
-                <a class="nav-link" href={{ url_for('index') }}>Dashboard</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href={{ url_for('add_category') }}>Add Category</a>
-            </li>
-            <!-- <li class="nav-item">
-                <a class="nav-link" href={{ url_for('create_campaign')}}>Create Campaign</a>
-            </li> -->
-            <li class="nav-item">
-                <a class="nav-link" href={{ url_for('sponsor_requests') }}>Request</a>
-            </li>
-            <!-- <li class="nav-item">
-                <a class="nav-link" href={{ url_for('add_niche') }}>Add Niche</a>
-            </li> -->
-            <li class="nav-item">
-                <a class="nav-link" href="">Summary</a>
-            </li>
+        
+        <li class="nav-item">
+            <a class="nav-link" href={{ url_for('all_campaign') }}>Running Campaigns</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href={{ url_for('summary_influencer')}}>Influencer Dashboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href={{ url_for('add_category') }}>Add Category</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href={{ url_for('view_message_admin')}}>Messages</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                More
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                <li><a class="dropdown-item" href={{ url_for('admin_view_flagged_campaign') }}>Flagged Campaign</a></li>
+                <li><a class="dropdown-item" href={{ url_for('admin_view_flagged_influencer') }}>Flagged Influencer</a></li>
+                <li><a class="dropdown-item" href={{ url_for('sponsor_requests') }}>Request</a></li>
+                <li><a class="dropdown-item" href={{ url_for('index') }}>Edit/Delete Category</a></li>
+                <li><a class="dropdown-item" href={{ url_for('statistics')}}>Summary</a></li>
+            </ul>
+        </li>
         
         {% elif session['role'] == 'sponsor' %}
+            <!-- Include Font Awesome CSS in your base template or head section -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
             <li class="nav-item">
-                <a class="nav-link" href={{ url_for('index') }}>Dashboard</a>
+                <a class="nav-link" href="{{ url_for('view_notification') }}">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge badge-danger">{{ notification_count }}</span>
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('all_campaign') }}>Dashboard</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href={{ url_for('sponsor_profile') }}>Profile</a>
+                <a class="nav-link" href={{ url_for('flagged_campaign_sponsor') }}>Flagged Campaign</a>
             </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link" href={{ url_for('edit_sponsor_profile') }}>Profile</a>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link" href={{ url_for('view_sponsor_profile') }}>View Profile</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href={{ url_for('add_category') }}>Add Category</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href={{ url_for('add_niche') }}>Add Niche</a>
+                <a class="nav-link" href={{ url_for('summary_influencer')}}>Summary Influencer</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href={{ url_for('create_campaign') }}>Create Campaign</a>
@@ -46,22 +62,39 @@
                 <a class="nav-link" href={{ url_for('sponsor_requests') }}>Request</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">View Campaigns</a>
+                <a class="nav-link" href={{ url_for('view_message')}}>Messages</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">Summary</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    More
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                    <li><a class="dropdown-item" href={{ url_for('add_category') }}>Add Category</a></li>
+                    <li><a class="dropdown-item" href={{ url_for('add_niche') }}>Add Niche</a></li>
+                    <li></li>
+                    <li><a class="dropdown-item" href={{ url_for('index') }}>Edit/Delete Category Request</a></li>
+                </ul>
             </li>
+        
         {% elif session['role'] == 'influencer' %}
             <li class="nav-item">
-                <a class="nav-link" href={{ url_for('index') }}>Dashboard</a>
+                <a class="nav-link" href={{ url_for('all_campaign') }}>Dashboard</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">View Campaigns</a>
+                <a class="nav-link" href={{ url_for('view_request') }}>Request from Sponsor</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">Summary</a>
+                <a class="nav-link" href={{ url_for('view_influencer_profile') }}>View Profile</a>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('flagged_influencer_view') }}>May be You Flagged! </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('summary_influencer')}}>Summary Influencer</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('view_message_for_influencer')}}>Message</a>
+            </li>
         {% endif %}
 
         <li class="nav-item">

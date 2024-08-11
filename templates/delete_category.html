@@ -1,47 +1,32 @@
 {% extends 'nav_link.html' %}
 
-{% block title %} Delete Niche - Admate {% endblock title %}
+{% block title %} Delete Category - Admate {% endblock title %}
 
 {% block main_content %}
-<style>
-    .centered-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-    .form-group label{
-        display: flex;
-        margin-top: 1rem;
-        min-width: 100px;
-    }
-    .form-group input, .form-group textarea, .form-group select{
-        margin-top: 0.8rem;
-    }
-    .form-group{
-        display: flex;
-    }
-</style>
-<div class="centered-content">
-    <h4 style="margin-top: 4rem;">Are You Sure to Delete this Category?</h4>
-    <form action="{{ '/delete_category/' + category.category_id|string }}" method="post" class="form">
-        <div class="form-group" style="margin-top: 3rem;">
-            <label for="title" class="form-label">Category Name:</label>
-            <input type="text" name="title" id="title" class="form-control" required value={{ category.name }} disabled>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger text-white text-center">
+                    <h4>Are You Sure to Delete this Category?</h4>
+                </div>
+                <div class="card-body">
+                    <form action="{{ url_for('delete_category', category_id=category.category_id) }}" method="post" class="form">
+                        <div class="form-group mt-3">
+                            <label for="title" class="form-label">Category Name:</label>
+                            <input type="text" name="title" id="title" class="form-control" required value="{{ category.name }}" disabled>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="content" class="form-label">Description:</label>
+                            <textarea name="content" id="content" class="form-control" rows="5" required disabled>{{ category.description }}</textarea>
+                        </div>
+                        <div class="form-group mt-4 text-center">
+                            <button type="submit" class="btn btn-danger">Delete Category</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="content" class="form-label">Description:</label>
-            <textarea name="content" id="content" class="form-control" required disabled>{{ category.description }}</textarea>
-        </div>
-        <div class="form-group">
-            <label for="image" class="form-label">Image:</label>
-            <input type="file" name="image" id="image" class="form-control" value={{ category.image }} disabled>
-        </div>
-        <div class="form-group" style="margin-top: 2rem; margin-left: 8rem;">
-            <button type="submit" value="Add Category" class="btn btn-danger"> Delete Category </button>
-        </div>
-    </form>
+    </div>
 </div>
-        
 {% endblock main_content %}

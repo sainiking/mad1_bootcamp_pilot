@@ -1,57 +1,37 @@
 {% extends 'base.html' %}
 
+
 {% block title %}
     Register Page
 {% endblock title%}
+
+{% block nav_items %}
+<li class="nav-item">
+    <a class="nav-link" href={{ url_for('index') }}>Home</a>
+</li>
+<li class="nav-item">
+        <a class="nav-link" href={{ url_for('login') }}>Login</a>
+    </li>
+<!-- <li class="nav-item">
+    <a class="nav-link" href="#">Register</a>
+</li> -->
+{% endblock nav_items %}
+
 {% block content %}
 
-<style>
-    .centered-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-    .form {
-        width: 10%; /* Adjust based on your preference */
-        max-width: 500px; /* Adjust based on your preference */
-    }
-    
-</style>
-
-<script>
-    // Function to toggle the radio button's checked state
-    function toggleRadio(radio) {
-        // Check if the radio was already checked before this click
-        if (radio.getAttribute("data-waschecked") === "true") {
-            radio.checked = false; // Uncheck it
-            radio.setAttribute("data-waschecked", "false");
-        } else {
-            // Mark all radios as not checked
-            var allRadios = document.getElementsByName(radio.name);
-            for (var i = 0; i < allRadios.length; i++) {
-                allRadios[i].setAttribute("data-waschecked", "false");
-            }
-            // This radio is now checked
-            radio.setAttribute("data-waschecked", "true");
-        }
-    }
-</script>
-
-<div class="centered-content">
-    <h2>Register Yourself with Admate Today!</h2>
-    <p style="margin-top: 1rem;">Choose your role to get started</p>
+<div class="centered-content" style="text-align: center;">
+    <h2 style="margin-top: 1rem;">Register Yourself with Admate Today!</h2>
+    <h5 style = "margin-top: 3rem;">Choose your role to get started!</h5>
 
     <form action="/first_page_registration" class="form" style="margin-top: 1rem;" method="post">
         
-        <div class="form-check form-switch">
+        <div class="form-check form-switch" style="display: flex; justify-content: center;margin-right: 0.7rem;">
             <input class="form-check-input" type="radio" name='role' value="sponsor" id="sponsor" onclick="toggleRadio(this);">
-            <label class="form-check-label" for="sponsor" >Sponsor</label>
+            <label class="form-check-label" for="sponsor" style="margin-left: 1rem;">Sponsor</label>
         </div>
-        <div class="form-check form-switch">
-            <input class="form-check-input" type="radio" name='role' id="influencer" value="sponsor" onclick="toggleRadio(this);">
-            <label class="form-check-label" for="influencer">Influencer</label>
+        <div class="form-check form-switch" style="display: flex; justify-content: center;">
+            <input class="form-check-input" type="radio" name='role' id="influencer" value="influencer" onclick="toggleRadio(this);">
+            <label class="form-check-label" for="influencer" style="margin-left: 1rem">Influencer</label>
         </div>
         <div class="form-group" style="margin-top: 2rem;">
             <input type="submit" value="Register" class="btn btn-primary">

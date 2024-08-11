@@ -1,0 +1,92 @@
+{% extends 'nav_link.html' %}
+
+{% block title %}
+    Profile
+{% endblock title %}
+
+{% block content %}
+
+<div class="centered-content">
+    <div style="display: flex; justify-content: center;">
+        <div class="card" style="width: 50%;">
+            <div class="card-body">
+                <h1 class="text-center">Profile</h1>
+                {% if session['username'] %}
+                    {% if session['role'] == 'sponsor' %}
+                    <div class="container">
+                        <p class="text-center">Please fill in the details below to complete your profile.</p>
+                    </div>
+                    <div style="display: flex; justify-content: center;">
+                        <form action="/edit_sponsor_profile" method="post" class="row g-3">
+                            <div class="col-md-6">
+                                <div class = 'form-group mt-2'>
+                                    <label for="first_name" class="form-label" >First Name</label>
+                                    <input type="text" name="first_name" class="form-control" id="first_name" value="{{ sponsor_profile.first_name }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2" >
+                                    <label for="last_name" class="form-label" >Last Name</label>
+                                    <input type="text" name="last_name" class="form-control" id="last_name"value="{{ sponsor_profile.last_name}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6" >
+                                <div class="form-group mt-2" >
+                                    <label for="email" class="form-label" >Email</label>
+                                    <input type="email" name="email" class="form-control" id="email" value="{{ sponsor_profile.email}}"> 
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2" >
+                                    <label for="phone" class="form-label" >Phone</label>
+                                    <input type="tel" name="phone" class="form-control" id="phone" value="{{ sponsor_profile.phone}}">
+                                </div>
+                            </div>
+                            <div class = "col-md-6">
+                                <div class="form-group mt-2" >
+                                    <label for="company_name" class="form-label" >Company Name</label>
+                                    <input type="text" name="company_name" class="form-control" id="company_name" value="{{ sponsor_profile.company_name}}" >
+                                </div>
+                            </div>
+                            <div class = 'col-md-6'>
+                                <div class="form-group mt-2" >
+                                    <label for="industry" class="form-label" >Industry</label>
+                                    <input type="text" name="industry" class="form-control" id="industry" value="{{ sponsor_profile.industry }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6" >
+                                <div class="form-group mt-2" >
+                                    <label for="company_website" class="form-label" >Company Website</label>
+                                    <input type="text" name="company_website" class="form-control" id="company_website" value="{{ sponsor_profile.company_website}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="budget" class="form-label" >Budget</label>
+                                    <input type="text" name="budget" class="form-control" id="budget" placeholder="₹" value="{{ sponsor_profile.budget}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2" >
+                                    <label for="company_description" class="form-label" >Company Description</label>
+                                    <textarea name="company_description" class="form-control" id="company_description" rows="4" cols="50">{{ sponsor_profile.company_description}}</textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="company_address" class="form-label" >Company Address</label>
+                                    <textarea name="company_address" class="form-control" id="company_address" rows="4" cols="50">{{ sponsor_profile.company_address}}</textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12 text-center mt-3">
+                                <button type="submit" class="btn btn-primary" style="border-radius: 15px; padding: 10px; width: 40%;">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>    
+{% endblock content %}

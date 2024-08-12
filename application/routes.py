@@ -102,11 +102,8 @@ def add_niche():
             flash('niche already exists')
             return redirect(url_for('add_niche'))
         
-        # if session['role'] == 'admin':
-        #     flash('You do not have permission to add niche')
-        #     return redirect(url_for('index'))
         
-        elif session['role'] == 'sponsor': #'sponsor' or session['role'] == 'influencer':
+        elif session['role'] == 'sponsor':
             niche = Niche(name=name, description=description, category_id=category_id, image_url=image_url) # type: ignore
             try:
                 db.session.add(niche)
@@ -604,13 +601,9 @@ def profile_view_influencer(user):
     influencer_profile = InfluencerProfile.query.filter_by(user=user).first()
     return render_template('profile_view_influencer.html', influencer_profile=influencer_profile)
 
-# @app.route('/summary_sponsors')
-# def summary_sponsor():  
-#     sponsors = SponsorProfile.query.all()
-#     return render_template('summary_sponsor.html', sponsors=sponsors)
 
 # Create Campaigns
-@app.route("/create_campaign", methods=["GET", "POST"])
+@app.route("/create_campaign", methods=["GET", "POST"]) # type: ignore
 def create_campaign():
     if req.method == "GET":
         campaign = Campaign.query.filter_by(user=session['username']).first()
@@ -658,7 +651,7 @@ def create_campaign():
             flash(f'Error adding campaign: {e}')
             return redirect(url_for('create_campaign'))
 
-@app.route("/edit_campaign/<int:campaign_id>", methods=["GET", "POST"])
+@app.route("/edit_campaign/<int:campaign_id>", methods=["GET", "POST"]) # type: ignore
 def edit_campaign(campaign_id):
     if req.method == "GET":
         campaign = Campaign.query.get(campaign_id)
@@ -827,8 +820,6 @@ def negotiate_campaign(campaign_id):
 
 
 # Flagged Campaigns, Sponsors and Influencers.
-
-
 @app.route('/flag_campaign/<int:campaign_id>', methods=['GET'])
 def flag_campaign(campaign_id):
     if 'username' not in session or session['role'] != 'admin':
